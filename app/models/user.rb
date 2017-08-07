@@ -5,6 +5,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  validates :username, presence: true
+
   def generate_authentication_token!
     self.update(authentication_token: Devise.friendly_token)
   end
