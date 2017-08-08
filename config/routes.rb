@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :kelases
   devise_for :users, skip: [:sessions, :registrations, :passwords]
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
