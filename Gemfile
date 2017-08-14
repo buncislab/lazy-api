@@ -12,6 +12,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'rack-cors'
 gem 'devise'
 gem 'simple_token_authentication'
+gem 'acts_as_commentable_with_threading'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

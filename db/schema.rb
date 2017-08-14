@@ -10,13 +10,53 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170807160732) do
+ActiveRecord::Schema.define(version: 20170814082916) do
+
+  create_table "comments", force: :cascade do |t|
+    t.integer "commentable_id"
+    t.string "commentable_type"
+    t.string "title"
+    t.text "body"
+    t.string "subject"
+    t.integer "user_id", null: false
+    t.integer "parent_id"
+    t.integer "lft"
+    t.integer "rgt"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["commentable_id", "commentable_type"], name: "index_comments_on_commentable_id_and_commentable_type"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
 
   create_table "kelases", force: :cascade do |t|
     t.string "title"
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "links", force: :cascade do |t|
+    t.string "title"
+    t.string "url"
+    t.string "description"
+    t.integer "user_id"
+    t.integer "kelas_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["kelas_id"], name: "index_links_on_kelas_id"
+    t.index ["user_id"], name: "index_links_on_user_id"
+  end
+
+  create_table "materis", force: :cascade do |t|
+    t.string "title"
+    t.string "file"
+    t.string "description"
+    t.integer "user_id"
+    t.integer "kelas_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["kelas_id"], name: "index_materis_on_kelas_id"
+    t.index ["user_id"], name: "index_materis_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -37,6 +77,18 @@ ActiveRecord::Schema.define(version: 20170807160732) do
     t.index ["authentication_token"], name: "index_users_on_authentication_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
+  create_table "videos", force: :cascade do |t|
+    t.string "title"
+    t.string "url"
+    t.string "description"
+    t.integer "user_id"
+    t.integer "kelas_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["kelas_id"], name: "index_videos_on_kelas_id"
+    t.index ["user_id"], name: "index_videos_on_user_id"
   end
 
 end
