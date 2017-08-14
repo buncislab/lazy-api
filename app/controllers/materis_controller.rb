@@ -1,10 +1,12 @@
 class MaterisController < ApplicationController
+  before_action :authenticate_user!, except: [:index, :show]
+  before_action :set_kelas
   before_action :set_materi, only: [:show, :update, :destroy]
 
   # GET /materis
   # GET /materis.json
   def index
-    @materis = Materi.all
+    @materis = @kelas.materis
   end
 
   # GET /materis/1
@@ -15,7 +17,7 @@ class MaterisController < ApplicationController
   # POST /materis
   # POST /materis.json
   def create
-    @materi = Materi.new(materi_params)
+    @materi = @kelas.materis.build(materi_params.merge!(user_id: current_user.id))
 
     if @materi.save
       render :show, status: :created, location: @materi
@@ -42,8 +44,12 @@ class MaterisController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    def set_kelas
+      @kelas = Kelas.find(params[:kelas_id])
+    end
+
     def set_materi
-      @materi = Materi.find(params[:id])
+      @materi = @kelas.materis.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

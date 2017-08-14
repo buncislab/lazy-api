@@ -1,10 +1,12 @@
 class LinksController < ApplicationController
+  before_action :authenticate_user!, except: [:index, :show]
+  before_action :set_kelas
   before_action :set_link, only: [:show, :update, :destroy]
-
+  
   # GET /links
   # GET /links.json
   def index
-    @links = Link.all
+    @links = @kelas.links
   end
 
   # GET /links/1
@@ -15,7 +17,7 @@ class LinksController < ApplicationController
   # POST /links
   # POST /links.json
   def create
-    @link = Link.new(link_params)
+    @link = @kelas.links.build(link_params.merge!(user_id: current_user.id))
 
     if @link.save
       render :show, status: :created, location: @link
@@ -41,9 +43,13 @@ class LinksController < ApplicationController
   end
 
   private
+    def set_kelas
+      @kelas = Kelas.find(params[:kelas_id])
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_link
-      @link = Link.find(params[:id])
+      @link = @kelas.links.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

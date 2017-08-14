@@ -15,7 +15,7 @@ class KelasesController < ApplicationController
   # POST /kelases
   # POST /kelases.json
   def create
-    @kelas = Kelas.new(kelas_params)
+    @kelas = current_user.kelases.build(kelas_params)
 
     if @kelas.save
       render :show, status: :created, location: @kelas
