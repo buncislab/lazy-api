@@ -4,5 +4,5 @@ class Kelas < ApplicationRecord
   has_many :links
   has_many :materis
   
-  belongs_to :user
+#  belongs_to :user
 end
