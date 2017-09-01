@@ -1,5 +1,5 @@
 class LinksController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :show]
+	acts_as_token_authentication_handler_for User, except: [:index, :show]
   before_action :set_kelas
   before_action :set_link, only: [:show, :update, :destroy]
   
