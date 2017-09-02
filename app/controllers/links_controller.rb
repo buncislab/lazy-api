@@ -20,7 +20,7 @@ class LinksController < ApplicationController
     @link = @kelas.links.build(link_params.merge!(user_id: current_user.id))
 
     if @link.save
-      render :show, status: :created, location: @link
+      render :show, status: :created
     else
       render json: @link.errors, status: :unprocessable_entity
     end
@@ -30,7 +30,7 @@ class LinksController < ApplicationController
   # PATCH/PUT /links/1.json
   def update
     if @link.update(link_params)
-      render :show, status: :ok, location: @link
+      render :show, status: :ok
     else
       render json: @link.errors, status: :unprocessable_entity
     end
