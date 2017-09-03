@@ -20,7 +20,7 @@ class MaterisController < ApplicationController
     @materi = @kelas.materis.build(materi_params.merge!(user_id: current_user.id))
 
     if @materi.save
-      render :show, status: :created, location: @materi
+      render :show, status: :created
     else
       render json: @materi.errors, status: :unprocessable_entity
     end
@@ -30,7 +30,7 @@ class MaterisController < ApplicationController
   # PATCH/PUT /materis/1.json
   def update
     if @materi.update(materi_params)
-      render :show, status: :ok, location: @materi
+      render :show, status: :ok
     else
       render json: @materi.errors, status: :unprocessable_entity
     end

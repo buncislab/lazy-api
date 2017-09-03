@@ -20,7 +20,7 @@ class VideosController < ApplicationController
     @video = @kelas.videos.build(video_params.merge!(user_id: current_user.id))
 
     if @video.save
-      render :show, status: :created, location: @video
+      render :show, status: :created
     else
       render json: @video.errors, status: :unprocessable_entity
     end
@@ -30,7 +30,7 @@ class VideosController < ApplicationController
   # PATCH/PUT /videos/1.json
   def update
     if @video.update(video_params)
-      render :show, status: :ok, location: @video
+      render :show, status: :ok
     else
       render json: @video.errors, status: :unprocessable_entity
     end
