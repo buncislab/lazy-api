@@ -7,7 +7,7 @@ class CommentsController < ApplicationController
   end
 
   def show
-    @comment = @Kelas.comments.find(params[:id])
+    @comment = @kelas.comment_threads.find(params[:id])
   end
 
   def create
