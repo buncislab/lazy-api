@@ -22,11 +22,16 @@ class CommentsController < ApplicationController
   end
 
   def update
-    
+    @comment = @kelas.comment_threads.find(params[:id])
+    if @comment.update(comment_params)
+      render :show, status: :ok
+    else
+      render json: @comment.errors, status: :unprocessable_entity
+    end
   end
 
   def destroy
-    @comment = Commend.find(params[:id])
+    @comment = @kelas.comment_threads.find(params[:id])
     @comment.destroy
   end
   
