@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170814082916) do
+ActiveRecord::Schema.define(version: 20170907182140) do
 
   create_table "comments", force: :cascade do |t|
     t.integer "commentable_id"
@@ -26,6 +26,15 @@ ActiveRecord::Schema.define(version: 20170814082916) do
     t.datetime "updated_at", null: false
     t.index ["commentable_id", "commentable_type"], name: "index_comments_on_commentable_id_and_commentable_type"
     t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "conversations", force: :cascade do |t|
+    t.integer "recipient_id"
+    t.integer "sender_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["recipient_id"], name: "index_conversations_on_recipient_id"
+    t.index ["sender_id"], name: "index_conversations_on_sender_id"
   end
 
   create_table "kelases", force: :cascade do |t|
@@ -57,6 +66,18 @@ ActiveRecord::Schema.define(version: 20170814082916) do
     t.datetime "updated_at", null: false
     t.index ["kelas_id"], name: "index_materis_on_kelas_id"
     t.index ["user_id"], name: "index_materis_on_user_id"
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.integer "recipient_id"
+    t.integer "user_id"
+    t.integer "conversation_id"
+    t.text "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["conversation_id"], name: "index_messages_on_conversation_id"
+    t.index ["recipient_id"], name: "index_messages_on_recipient_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

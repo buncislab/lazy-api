@@ -34,7 +34,11 @@ module LazyApi
         resource '*', :headers => :any, :methods => [:get, :put, :patch, :delete, :post, :options]
       end
     end
+    
+    config.session_store :cookie_store
+    config.middleware.use ActionDispatch::Cookies
+    config.middleware.use ActionDispatch::Session::CookieStore, config.session_options
 
-    config.api_only = false
+    config.api_only = true
   end
 end
