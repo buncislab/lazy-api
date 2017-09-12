@@ -10,7 +10,17 @@ class Message < ApplicationRecord
 
   def bikin_notif
     self.notif({ 
-        title: "you got new message", 
+        title: "you got new message",
+        message: {
+          "_id": self.id,
+          "text": self.body,
+          "createdAt": self.created_at,
+          "user": {
+              "_id": self.user_id,
+              "name": self.user.username,
+              "avatar": "https://facebook.github.io/react/img/logo_og.png"
+          }
+      },
         body: self.body, 
         sound: "true"},
       self.recipient.fcm_device_token)

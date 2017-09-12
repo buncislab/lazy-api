@@ -7,7 +7,7 @@ class ConversationsController < ApplicationController
   end
 
   def show
-    @messages = @conversation.messages
+    @messages = @conversation.messages.order(created_at: :desc)
   end
 
   private
