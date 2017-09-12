@@ -13,6 +13,7 @@ gem 'devise'
 gem 'simple_token_authentication'
 gem 'acts_as_commentable_with_threading'
 gem 'rails_admin', '~> 1.2'
+gem 'fcm' 
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
