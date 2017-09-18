@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :update, :destroy]
+  acts_as_token_authentication_handler_for User, only: [:update]  
+  before_action :set_user, only: [:show, :destroy]
 
   def index
     @users = User.all
@@ -18,6 +19,7 @@ class UsersController < ApplicationController
   end
 
   def update
+    @user = current_user
     if @user.update(user_params)
       render :show, status: :ok, location: @user
     else
@@ -35,6 +37,6 @@ class UsersController < ApplicationController
     end
 
     def user_params
-      params.require(:user).permit(:username, :email, :password, :password_confirmation)   
+      params.require(:user).permit(:username, :email, :password, :password_confirmation, :fcm_device_token )   
     end
 end
