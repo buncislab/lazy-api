@@ -6,7 +6,7 @@ git_source(:github) do |repo_name|
 end
 
 gem 'rails', '~> 5.1.2'
-gem 'puma', '~> 3.7'
+gem 'puma', '~> 3.12'
 gem 'jbuilder', '~> 2.5'
 gem 'rack-cors'
 gem 'devise'
