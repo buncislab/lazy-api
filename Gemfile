@@ -12,7 +12,7 @@ gem 'rack-cors'
 gem 'devise'
 gem 'simple_token_authentication'
 gem 'acts_as_commentable_with_threading'
-gem 'rails_admin', '~> 1.2'
+gem 'rails_admin', '~> 1.4'
 gem 'fcm' 
 
 group :development, :test do
